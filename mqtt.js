@@ -1,5 +1,5 @@
 const mqtt = require('mqtt');
-const HermesMessage = require('../lib/message');
+const HermesMessage = require('hermes-message');
 
 function init (settings) {
   return function (hermes) {
