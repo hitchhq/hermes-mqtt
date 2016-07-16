@@ -1,6 +1,6 @@
 {
   "name": "hermes-mqtt",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "MQTT adapter for HermesJS",
   "main": "mqtt.js",
   "repository": "https://github.com/hitchhq/hermes-mqtt.git",
@@ -13,7 +13,7 @@
   "author": "Francisco Mendez Vilas (fmvilas@gmail.com)",
   "license": "MIT",
   "dependencies": {
-    "hermes-message": "^0.0.1",
+    "hermes-message": "~0.1.0",
     "mqtt": "^1.12.0"
   }
 }

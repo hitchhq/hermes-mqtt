@@ -1,3 +1,5 @@
+'use strict';
+
 const mqtt = require('mqtt');
 const HermesMessage = require('hermes-message');
 
@@ -56,7 +58,7 @@ function _createMessage (packet, client) {
 }
 
 function _send (message) {
-  var payload = message.payload;
+  let payload = message.payload;
 
   if (typeof payload === 'object' && !(payload instanceof Buffer)) {
     try {
