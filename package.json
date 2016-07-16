@@ -1,5 +1,5 @@
 {
-  "name": "hermes-mqtt",
+  "name": "hermesjs-mqtt",
   "version": "1.0.0",
   "description": "MQTT adapter for HermesJS",
   "main": "mqtt.js",
@@ -13,7 +13,7 @@
   "author": "Francisco Mendez Vilas (fmvilas@gmail.com)",
   "license": "MIT",
   "dependencies": {
-    "hermes-message": "~1.0.0",
+    "hermesjs-message": "~1.0.0",
     "mqtt": "^1.12.0"
   }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
 const mqtt = require('mqtt');
-const HermesMessage = require('hermes-message');
+const HermesMessage = require('hermesjs-message');
 
 function init (settings) {
   return function (hermes) {
