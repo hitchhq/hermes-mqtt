@@ -1,8 +1,11 @@
 {
   "name": "hermesjs-mqtt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MQTT adapter for HermesJS",
   "main": "mqtt.js",
+  "scripts": {
+    "test": "mocha test"
+  },
   "repository": "https://github.com/hitchhq/hermes-mqtt.git",
   "bugs": "https://github.com/hitchhq/hermes-mqtt/issues",
   "keywords": [
@@ -13,7 +16,11 @@
   "author": "Francisco Mendez Vilas (fmvilas@gmail.com)",
   "license": "MIT",
   "dependencies": {
-    "hermesjs-message": "~1.0.0",
+    "hermesjs-message": "~2.0.0",
     "mqtt": "^1.12.0"
+  },
+  "devDependencies": {
+    "should": "^9.0.2",
+    "sinon": "^1.17.4"
   }
 }
