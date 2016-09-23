@@ -1,6 +1,6 @@
 {
   "name": "hermesjs-mqtt",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MQTT adapter for HermesJS",
   "main": "mqtt.js",
   "scripts": {
