@@ -12,31 +12,33 @@ function init (settings) {
 function HermesMQTT (settings, hermes) {
   this.hermes = hermes;
   this.server_settings = settings;
-  this.listen = _listen.bind(this);
-  this.send = _send.bind(this);
 }
 
-function _setup () {
+HermesMQTT.prototype.listen = function listen () {
+  this.client = this.connect();
+  this.setup();
+  return this.client;
+};
+
+HermesMQTT.prototype.connect = function connect () {
+  return mqtt.connect(this.server_settings.host_url || 'mqtt://localhost');
+};
+
+HermesMQTT.prototype.setup = function setup () {
   this.client.on('connect', () => {
     this.hermes.emit('broker:ready', { name: 'MQTT adapter' });
     this.client.subscribe(this.server_settings.topics || '#', {
       qos: this.server_settings.qos || 0
     });
   });
-  this.client.on('message', _published.bind(this));
-}
+  this.client.on('message', this.published.bind(this));
+};
 
-function _listen () {
-  this.client = mqtt.connect(this.server_settings.host_url || 'mqtt://localhost');
-  _setup.call(this);
-  return this.client;
-}
+HermesMQTT.prototype.published = function published (topic, message, packet) {
+  this.hermes.emit('broker:message', this.createMessage(packet, this.client));
+};
 
-function _published (topic, message, packet) {
-  this.hermes.emit('broker:message', _createMessage.call(this, packet, this.client));
-}
-
-function _createMessage (packet, client) {
+HermesMQTT.prototype.createMessage = function createMessage (packet, client) {
   const message = new HermesMessage({
     protocol: this.server_settings.protocol || 'mqtt',
     payload: packet.payload,
@@ -52,12 +54,12 @@ function _createMessage (packet, client) {
     original_packet: packet
   });
 
-  message.send = _send.bind(this, message);
+  message.on('send', this.send.bind(this, message));
 
   return message;
-}
+};
 
-function _send (message) {
+HermesMQTT.prototype.send = function send (message) {
   let payload = message.payload;
 
   if (typeof payload === 'object' && !(payload instanceof Buffer)) {
@@ -76,6 +78,6 @@ function _send (message) {
     qos: this.server_settings.qos || 0,
     retain: this.server_settings.retain || false
   });
-}
+};
 
 module.exports = init;
