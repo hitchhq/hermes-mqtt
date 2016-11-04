@@ -40,18 +40,20 @@ HermesMQTT.prototype.published = function published (topic, message, packet) {
 
 HermesMQTT.prototype.createMessage = function createMessage (packet, client) {
   const message = new HermesMessage({
-    protocol: this.server_settings.protocol || 'mqtt',
-    payload: packet.payload,
-    connection: client,
     topic: packet.topic,
-    headers: {
-      cmd: packet.cmd,
-      retain: packet.retain,
-      qos: packet.qos,
-      dup: packet.dup,
-      length: packet.length
+    payload: packet.payload,
+    protocol: {
+      name: this.server_settings.protocol || 'mqtt',
+      headers: {
+        cmd: packet.cmd,
+        retain: packet.retain,
+        qos: packet.qos,
+        dup: packet.dup,
+        length: packet.length
+      }
     },
-    original_packet: packet
+    connection: client,
+    packet
   });
 
   message.on('send', this.send.bind(this, message));
