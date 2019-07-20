@@ -21,7 +21,7 @@ HermesMQTT.prototype.listen = function listen () {
 };
 
 HermesMQTT.prototype.connect = function connect () {
-  return mqtt.connect(this.server_settings.host_url || 'mqtt://localhost');
+  return mqtt.connect(this.server_settings.host_url || 'mqtt://localhost', this.server_settings);
 };
 
 HermesMQTT.prototype.setup = function setup () {
